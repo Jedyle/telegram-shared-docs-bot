@@ -13,7 +13,7 @@ def list_docs_for_deletion(update, context):
         reply_markup=doc_list_markup(
             docs,
             callback_data_func=lambda doc: f"{DELETE_DOC} {doc}",
-            doc_name_func=lambda doc: f"DELETE '{doc}'"
+            doc_name_func=lambda doc: f"DELETE '{doc}'",
         ),
     )
 

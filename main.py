@@ -10,7 +10,13 @@ from telegram.ext import (
 )
 from commands.retrieve_doc import GET_DOC, list_docs_to_retrieve, retrieve_doc
 from commands.create_doc import create_doc
-from commands.update_doc import UPDATE_DOC, list_docs_to_update, update_doc, update_inline, update_content
+from commands.update_doc import (
+    UPDATE_DOC,
+    list_docs_to_update,
+    update_doc,
+    update_inline,
+    update_content,
+)
 from commands.delete_doc import DELETE_DOC, list_docs_for_deletion, delete_doc
 
 logging.basicConfig(
@@ -30,10 +36,7 @@ def help_text(update, context):
 /update_doc - Update an existing doc's content
 /delete_doc - Delete a doc
 """
-    context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=help_message,
-    )
+    context.bot.send_message(chat_id=update.effective_chat.id, text=help_message)
 
 
 def main():
@@ -48,19 +51,25 @@ def main():
     dispatcher.add_handler(CommandHandler("create_doc", create_doc))
 
     dispatcher.add_handler(CommandHandler("list_docs", list_docs_to_retrieve))
-    dispatcher.add_handler(CallbackQueryHandler(
-        retrieve_doc, pattern=rf"^{GET_DOC} \S.+", pass_chat_data=True
-    ))
+    dispatcher.add_handler(
+        CallbackQueryHandler(
+            retrieve_doc, pattern=rf"^{GET_DOC} \S.+", pass_chat_data=True
+        )
+    )
 
     dispatcher.add_handler(CommandHandler("delete_doc", list_docs_for_deletion))
-    dispatcher.add_handler(CallbackQueryHandler(
-        delete_doc, pattern=rf"^{DELETE_DOC} \S.+", pass_chat_data=True
-    ))
+    dispatcher.add_handler(
+        CallbackQueryHandler(
+            delete_doc, pattern=rf"^{DELETE_DOC} \S.+", pass_chat_data=True
+        )
+    )
 
     dispatcher.add_handler(CommandHandler("update_doc", list_docs_to_update))
-    dispatcher.add_handler(CallbackQueryHandler(
-        update_doc, pattern=rf"^{UPDATE_DOC} \S.+", pass_chat_data=True
-    ))
+    dispatcher.add_handler(
+        CallbackQueryHandler(
+            update_doc, pattern=rf"^{UPDATE_DOC} \S.+", pass_chat_data=True
+        )
+    )
 
     dispatcher.add_handler(CommandHandler("update_content", update_content))
 

@@ -35,7 +35,7 @@ def update_doc(update, context):
                 "Click to update document above",
                 switch_inline_query_current_chat=doc_name + "\n" + text,
             )
-        ],
+        ]
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -43,7 +43,7 @@ def update_doc(update, context):
     context.bot.send_message(
         chat_id=update.effective_chat.id,
         text=context.chat_data[doc_name]["text"],
-        reply_markup=reply_markup
+        reply_markup=reply_markup,
     )
     query.answer()
 
@@ -74,7 +74,7 @@ def update_content(update, context):
             return
         context.chat_data[filename] = {
             "text": text,
-            "from": update.message.from_user.to_dict()
+            "from": update.message.from_user.to_dict(),
         }
         update.message.reply_text(f"Doc {filename} has been updated")
     except Exception as e:

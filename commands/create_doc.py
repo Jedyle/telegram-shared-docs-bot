@@ -22,6 +22,4 @@ def create_doc(update, context):
         "text": "Empty doc... Please fill!",
         "from": update.message.from_user.to_dict(),
     }
-    update.message.reply_text(
-        text=f"Empty message has been saved as '{document}'.",
-    )
+    update.message.reply_text(text=f"Empty message has been saved as '{document}'.")

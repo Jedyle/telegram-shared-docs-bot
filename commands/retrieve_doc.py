@@ -21,7 +21,6 @@ def retrieve_doc(update, context):
     doc_name = validate_action_on_single_doc(update, context, GET_DOC)
 
     context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=context.chat_data[doc_name]["text"]
+        chat_id=update.effective_chat.id, text=context.chat_data[doc_name]["text"]
     )
     query.answer()
