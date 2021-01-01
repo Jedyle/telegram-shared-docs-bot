@@ -1,4 +1,4 @@
-from service import doc_list_markup, validate_action_on_single_doc
+from shared_docs_bot.service import doc_list_markup, validate_action_on_single_doc
 
 
 GET_DOC = "GET_DOC"
@@ -19,6 +19,8 @@ def retrieve_doc(update, context):
     query = update.callback_query
 
     doc_name = validate_action_on_single_doc(update, context, GET_DOC)
+    if not doc_name:
+        return
 
     context.bot.send_message(
         chat_id=update.effective_chat.id, text=context.chat_data[doc_name]["text"]

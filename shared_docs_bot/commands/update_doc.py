@@ -6,7 +6,7 @@ from telegram import (
     InputTextMessageContent,
 )
 from uuid import uuid4
-from service import doc_list_markup, validate_action_on_single_doc
+from shared_docs_bot.service import doc_list_markup, validate_action_on_single_doc
 
 
 UPDATE_DOC = "UPDATE_DOC"
@@ -27,6 +27,9 @@ def update_doc(update, context):
     query = update.callback_query
 
     doc_name = validate_action_on_single_doc(update, context, UPDATE_DOC)
+    if not doc_name:
+        return
+
     text = context.chat_data.get(doc_name)["text"]
 
     keyboard = [
@@ -49,9 +52,7 @@ def update_doc(update, context):
 
 
 def update_inline(update, context):
-    """Handle the inline query."""
     query = update.inline_query.query
-    results = []
     filename, text = query.split("\n", 1)
     filename = filename.strip(" ")
     results = [

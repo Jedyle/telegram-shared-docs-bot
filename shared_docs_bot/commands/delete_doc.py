@@ -1,5 +1,4 @@
-import logging
-from service import doc_list_markup, validate_action_on_single_doc
+from shared_docs_bot.service import doc_list_markup, validate_action_on_single_doc
 
 
 DELETE_DOC = "DELETE_DOC"
@@ -23,6 +22,8 @@ def delete_doc(update, context):
     query.answer()
 
     doc_name = validate_action_on_single_doc(update, context, DELETE_DOC)
+    if not doc_name:
+        return
 
     context.bot.send_message(
         chat_id=update.effective_chat.id, text=context.chat_data.pop(doc_name)["text"]

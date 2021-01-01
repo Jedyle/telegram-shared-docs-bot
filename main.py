@@ -8,16 +8,24 @@ from telegram.ext import (
     PicklePersistence,
     CallbackQueryHandler,
 )
-from commands.retrieve_doc import GET_DOC, list_docs_to_retrieve, retrieve_doc
-from commands.create_doc import create_doc
-from commands.update_doc import (
+from shared_docs_bot.commands.retrieve_doc import (
+    GET_DOC,
+    list_docs_to_retrieve,
+    retrieve_doc,
+)
+from shared_docs_bot.commands.create_doc import create_doc
+from shared_docs_bot.commands.update_doc import (
     UPDATE_DOC,
     list_docs_to_update,
     update_doc,
     update_inline,
     update_content,
 )
-from commands.delete_doc import DELETE_DOC, list_docs_for_deletion, delete_doc
+from shared_docs_bot.commands.delete_doc import (
+    DELETE_DOC,
+    list_docs_for_deletion,
+    delete_doc,
+)
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
